@@ -1,12 +1,17 @@
-package com.levent.consultantapi.repository;
+package com.levent.consultantapi.repository.impl;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.levent.consultantapi.model.Consultant;
+import org.springframework.context.annotation.Primary;
+import org.springframework.stereotype.Repository;
 
+import com.levent.consultantapi.model.Consultant;
+import com.levent.consultantapi.repository.ConsultantRepository;
+
+@Repository
 public class ConsultantStubImpl implements ConsultantRepository {
 	
 	private Map<Long, Consultant> consultants;
