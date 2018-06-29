@@ -1,5 +1,5 @@
-Spring Boot RESTful Webservice Example
-======================================
+Spring Boot RESTful Web Service Example
+=======================================
 The main purpose of this sample project is to demonstrate the capabilities of spring boot.
 But additionally, I want to show challenging problems that can occur during the development
 while using the Spring Boot. 
@@ -20,7 +20,7 @@ implementation for the single interface scenario I've explained above.
 Lastly, I will explain all the deployment details, the main configuration of the whole project
 including H2 database configuration.
 
-Moreover, I will also demonstarte how you are going to test your RESTful application with
+Moreover, I will also demonstrate how you are going to test your RESTful application with
 Postman tool.
 
 TOC
@@ -151,3 +151,75 @@ dependency to our dependencies block;
 
  4 Making Uber Jar
 ------------------
+
+When we are developing a web service, let's say, using Jersey framework within the Spring context,
+we make a .war file and upload it to a container. However, Spring Boot is a containerless framework.
+So we do not need any web container, which means also we won't need to generate a .war file. What
+we have to do is pack all the libraries and frameworks we are using in our project into a big jar
+file, the Uber Jar (a.k.a. Fat Jar).
+
+To do so, our build tool maven has a plugin named as Maven Shade Plugin. We are going to define
+it within the build block of our POM file. You can see the sample build block as below;
+
+```
+<build>
+	<plugins>
+		<plugin>
+			<groupId>org.apache.maven.plugins</groupId>
+			<artifactId>maven-compiler-plugin</artifactId>
+			<configuration>
+				<source>1.8</source>
+				<target>1.8</target>
+			</configuration>
+		</plugin>
+		<plugin>
+		    <groupId>org.apache.maven.plugins</groupId>
+		    <artifactId>maven-shade-plugin</artifactId>
+		    <executions>
+		        <execution>
+			        <phase>package</phase>
+			        <goals>
+			            <goal>shade</goal>
+			        </goals>
+			        <configuration>
+			            <transformers>
+							<transformer 
+							    implementation="org.apache.maven.plugins.shade.resource.AppendingTransformer">
+							    <resource>META-INF/spring.handlers</resource>
+							</transformer>
+							<transformer
+							    implementation="org.springframework.boot.maven.PropertiesMergingResourceTransformer">
+							    <resource>META-INF/spring.factories</resource>
+							</transformer>
+							<transformer
+							    implementation="org.apache.maven.plugins.shade.resource.AppendingTransformer">
+							    <resource>META-INF/spring.schemas</resource>
+							</transformer>
+							<transformer
+							    implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer" />
+			                <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+			                    <mainClass>com.levent.consultantapi.EntryPoint</mainClass>
+			                </transformer>
+			            </transformers>
+			        </configuration>
+		        </execution>
+		    </executions>
+		</plugin>
+	</plugins>
+</build>
+```
+
+As you can see, there are two plugins used in the plugins block of the build block above. I've
+used maven compiler plugin so that I can define the source and destination version. The other
+plugin is the Maven Shade Plugin, which we use in order to pack our Uber Jar.
+
+In the Maven Shade Plugin block, we define our mainClass. Because our application is a standalone
+Java application, we have to define the Entry Point, the starter class of our appliacation. The
+name of this class is arbitrary.
+
+You can check out the full POM file: [Project Object Model](https://github.com/bzdgn/simple-grizzly-standalone-restful-webservice-example/blob/master/pom.xml)
+
+[Go back to TOC](#toc)
+
+
+
