@@ -97,7 +97,8 @@ application archetype, then we will add the spring boot dependencies;
 You can use the following maven command to create a project. In this project, I've used this exact
 maven command to create our project;
 
-```mvn archetype:generate -DgroupId=com.levent.consultantapi -DartifactId=consultant-api  -DarchetypeArtifactId=maven-archetype-quickstart -DinteractiveMode=false
+```
+mvn archetype:generate -DgroupId=com.levent.consultantapi -DartifactId=consultant-api  -DarchetypeArtifactId=maven-archetype-quickstart -DinteractiveMode=false
 ```
 
 [Go back to TOC](#toc)
