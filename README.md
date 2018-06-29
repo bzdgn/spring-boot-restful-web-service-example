@@ -26,8 +26,8 @@ Postman tool.
 TOC
 ---
 - [0 Prerequisite](#0-prerequisite) <br/>
-- [1 Entry Point](#1-entry-point) <br/>
-- [2 Repository](#2-repository) <br/>
+- [1 About Spring Boot](#1-about-spring-boot) <br/>
+- [2 Spring Boot Setup](#2-spring-boot-setup) <br/>
 - [3 Using Config Manager](#3-using-config-manager) <br/>
 - [4 Logging](#4-logging) <br/>
 - [5 Testing And Incoming Outgoing JSON Samples](#5-testing-and-incoming-outgoing-json-samples) <br/>
@@ -45,4 +45,46 @@ To use this project, you are going to need;
 - Java JDK 8 (1.8)
 - Maven compatibile with JDK 8
 - Any Java IDE
+
+ 1 About Spring Boot
+--------------------
+Whenever there is a new framework on the town, you must think two thinks. One, why should I use this
+framework which means "what are the benefits of this framework", also can be interpreted like "what
+this framework solves?". Two, "When should I use this framework?", also can be interpreted as "on
+which specific scenarios this framework is useful" or can be simplified as "what is the problem domain
+of this framework?".
+
+When we make a web service with spring framework, we have to generate a war file, we need to configure
+web.xml, and also if we are going to use the connection pool, the configuration is costly. All of these
+increases the cost of time. So instead of writing your code, doing your development, you a lot of time
+is wasted during the configuration. This is where Spring Boot comes to the action. Spring Boot simplifies
+configuration, reduces boilerplate code that puts no any value to your software development.
+
+So, what Spring Boot solves is the time lost for the configuration. For example, you can create a web
+service with Spring Boot that runs on an embedded Tomcat server which is automatically configured and
+you don't have to deal with the configuration. You can do all your configuration parameters via default
+application properties. Also you can connect to an H2 embedded database, same applies for the
+configuration here. 
+
+Secondly, you don't have to generate a war file. All Spring Boot applications run as a standalone java
+jar file. Where is it useful then? If you are using a microservice architecture which runs especially
+on a cloud (but not necessarily), then you can easily do your development via Spring Boot. In my opinion,
+Spring Boot is one of the best frameworks you should use on such a scenario and architecture. You can
+easily create simple web services, put them inside a Docker container (which is not a part of this
+tutorial) and run them on the Amazon Web Services or on any cloud environment.
+
+ 2 Spring Boot Setup
+--------------------
+What we need to setup a Spring Boot project. However there are other ways (like spring initializer),
+I'll go with setting up our project with maven.
+
+Because that we are creating a web application here, we will first create a maven project with web
+application archetype, then we will add the spring boot dependencies;
+
+You can use the following maven command to create a project. In this project, I've used this exact
+maven command to create our project;
+
+```mvn archetype:generate -DgroupId=com.levent.consultantapi -DartifactId=consultant-api  -DarchetypeArtifactId=maven-archetype-quickstart -DinteractiveMode=false```
+
+
 
