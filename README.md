@@ -109,12 +109,12 @@ How we make our project a Spring Boot project. We simply define a parent project
 just as below;
 
 ```
-    <!-- Spring Parent Project -->
-	<parent>
-		<groupId>org.springframework.boot</groupId>
-		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>1.3.1.RELEASE</version>
-	</parent>
+<!-- Spring Parent Project -->
+<parent>
+	<groupId>org.springframework.boot</groupId>
+	<artifactId>spring-boot-starter-parent</artifactId>
+	<version>1.3.1.RELEASE</version>
+</parent>
 ```
 
 Then our dependencies aware of our Spring Boot project. Then for example, if we are going to create
@@ -122,11 +122,11 @@ a web application which is true, then we add the Spring Boot Starter dependencie
 it is vital for us to add the dependency below;
 
 ```
-	<!-- Spring boot starter web: integrates and auto-configures  -->
-	<dependency>
-		<groupId>org.springframework.boot</groupId>
-		<artifactId>spring-boot-starter-web</artifactId>
-	</dependency>
+<!-- Spring boot starter web: integrates and auto-configures  -->
+<dependency>
+	<groupId>org.springframework.boot</groupId>
+	<artifactId>spring-boot-starter-web</artifactId>
+</dependency>
 ```
 
 See that we did not use the version attribute of the dependency block. That's what Spring Boot is 
@@ -138,11 +138,11 @@ Moreover, in this project we will need an H2 embedded database. So we are going 
 dependency to our dependencies block;
 
 ```
-	<!-- H2 Embedded Database -->
-	<dependency>
-		<groupId>com.h2database</groupId>
-		<artifactId>h2</artifactId>
-	</dependency>
+<!-- H2 Embedded Database -->
+<dependency>
+	<groupId>com.h2database</groupId>
+	<artifactId>h2</artifactId>
+</dependency>
 ```
 
 [Go back to TOC](#toc)
