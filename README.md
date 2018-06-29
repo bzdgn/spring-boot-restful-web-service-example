@@ -46,6 +46,8 @@ To use this project, you are going to need;
 - Maven compatibile with JDK 8
 - Any Java IDE
 
+[Go back to TOC](#toc)
+
  1 About Spring Boot
 --------------------
 Whenever there is a new framework on the town, you must think two thinks. One, why should I use this
@@ -73,6 +75,8 @@ Spring Boot is one of the best frameworks you should use on such a scenario and 
 easily create simple web services, put them inside a Docker container (which is not a part of this
 tutorial) and run them on the Amazon Web Services or on any cloud environment.
 
+[Go back to TOC](#toc)
+
  2 Spring Boot Setup
 --------------------
 What we need to setup a Spring Boot project. However there are other ways (like spring initializer),
@@ -86,5 +90,5 @@ maven command to create our project;
 
 ```mvn archetype:generate -DgroupId=com.levent.consultantapi -DartifactId=consultant-api  -DarchetypeArtifactId=maven-archetype-quickstart -DinteractiveMode=false```
 
-
+[Go back to TOC](#toc)
 
