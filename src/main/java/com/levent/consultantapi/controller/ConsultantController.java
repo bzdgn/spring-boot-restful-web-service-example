@@ -3,7 +3,6 @@ package com.levent.consultantapi.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.levent.consultantapi.model.Consultant;
 import com.levent.consultantapi.service.ConsultantService;
+import com.levent.consultantapi.service.InfoService;
 
 @RestController
 @RequestMapping("api/v1/")
@@ -20,11 +20,14 @@ public class ConsultantController {
 	@Autowired
 	private ConsultantService consultantService;
 	
+	@Autowired
+	private InfoService greeter;
+	
 	public ConsultantController() {}
 	
 	@RequestMapping("/")
 	public String test() {
-		return "ConsultantController is up and working.";
+		return greeter.getGreet();
 	}
 	
 	@RequestMapping(value = "consultants", method = RequestMethod.GET) 

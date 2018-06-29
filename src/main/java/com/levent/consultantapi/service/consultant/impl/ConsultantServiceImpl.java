@@ -1,4 +1,4 @@
-package com.levent.consultantapi.service.impl;
+package com.levent.consultantapi.service.consultant.impl;
 
 import java.util.List;
 
