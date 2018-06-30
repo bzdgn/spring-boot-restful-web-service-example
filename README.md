@@ -238,3 +238,41 @@ You can see the logical representation below of these packages;
 
 ![project-overview](https://github.com/bzdgn/spring-boot-restful-web-service-example/blob/master/ScreenShots/01_diagram.png)
 
+Controller package has one controller class which is [ConsultantController](https://github.com/bzdgn/spring-boot-restful-web-service-example/blob/master/src/main/java/com/levent/consultantapi/controller/ConsultantController.java). With [ConsultantController](https://github.com/bzdgn/spring-boot-restful-web-service-example/blob/master/src/main/java/com/levent/consultantapi/controller/ConsultantController.java),
+you can define all the RESTful methods. This class need to use a Service Layer implementation, thus
+[ConsultantController](https://github.com/bzdgn/spring-boot-restful-web-service-example/blob/master/src/main/java/com/levent/consultantapi/controller/ConsultantController.java) has a [ConsultantService](https://github.com/bzdgn/spring-boot-restful-web-service-example/blob/master/src/main/java/com/levent/consultantapi/service/ConsultantService.java) interface and we are using the @Autowired annotation 
+so that Spring context is going to find the appropriate implementation. In our case, we have only 
+one Service implementation which is [ConsultantServiceImpl](https://github.com/bzdgn/spring-boot-restful-web-service-example/blob/master/src/main/java/com/levent/consultantapi/service/consultant/impl/ConsultantServiceImpl.java).
+
+You can also see the [InfoService](https://github.com/bzdgn/spring-boot-restful-web-service-example/blob/master/src/main/java/com/levent/consultantapi/service/InfoService.java) interface wrapped inside the [ConsultantController](https://github.com/bzdgn/spring-boot-restful-web-service-example/blob/master/src/main/java/com/levent/consultantapi/controller/ConsultantController.java) class. It has also
+marked with the @Autowired annotation. I'll explain it later for the simplicity but our first focus
+in this project overview is to explain the main structure of this simple application.
+
+At service layer, we have the interface [ConsultantService](https://github.com/bzdgn/spring-boot-restful-web-service-example/blob/master/src/main/java/com/levent/consultantapi/service/ConsultantService.java) and one implementation that fits with this
+interface: [ConsultantServiceImpl](https://github.com/bzdgn/spring-boot-restful-web-service-example/blob/master/src/main/java/com/levent/consultantapi/service/consultant/impl/ConsultantServiceImpl.java). You will see that [ConsultantServiceImpl](https://github.com/bzdgn/spring-boot-restful-web-service-example/blob/master/src/main/java/com/levent/consultantapi/service/consultant/impl/ConsultantServiceImpl.java) has a [ConsultantRepository](https://github.com/bzdgn/spring-boot-restful-web-service-example/blob/master/src/main/java/com/levent/consultantapi/repository/ConsultantRepository.java)
+interface and that interface also marked with the @Autowired annotation.
+
+At repository layer, we have a different situation. There are two implementation fits with this
+[ConsultantRepository](https://github.com/bzdgn/spring-boot-restful-web-service-example/blob/master/src/main/java/com/levent/consultantapi/repository/ConsultantRepository.java) interface;
+- [ConsultantStubImpl](https://github.com/bzdgn/spring-boot-restful-web-service-example/blob/master/src/main/java/com/levent/consultantapi/repository/impl/ConsultantStubImpl.java)
+- [ConsultantJPARepositoryImpl](https://github.com/bzdgn/spring-boot-restful-web-service-example/blob/master/src/main/java/com/levent/consultantapi/repository/impl/ConsultantJPARepositoryImpl.java)
+
+So, how Spring handles if there are two implementation classes those implements one interface with
+@Autowired annotation? How spring is going to select the implementation candidates? Normally, Spring
+is going to get confused, throw Exceptions and you will find the following message inside the stack
+trace;
+
+```
+Caused by: org.springframework.beans.factory.NoUniqueBeanDefinitionException: No qualifying bean of type [com.levent.consultantapi.repository.ConsultantRepository] is defined: expected single matching bean but found 2: consultantJPARepositoryImpl,consultantStubImpl
+```
+
+Because that there are two candidate implementation for one single interface, autowiring functionality
+of Spring Context will fail. The solution is to use @Primary annotation. You can see it inside the
+[ConsultantJPARepositoryImpl](https://github.com/bzdgn/spring-boot-restful-web-service-example/blob/master/src/main/java/com/levent/consultantapi/repository/impl/ConsultantJPARepositoryImpl.java). When there are multiple implementation for the same interface marked with
+@Autowired annotation, you have to use @Primary on one of the implementations.
+
+But what if we want to have two different implementations and we want to change which implementation
+to use, without changing the code ? Then we can use an external configuration, which I'm going to
+explain it on next chapter.
+
+[Go back to TOC](#toc)
