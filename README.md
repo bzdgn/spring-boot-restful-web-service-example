@@ -226,3 +226,4 @@ You can check out the full POM file: [Project Object Model](https://github.com/b
  5 Project Overview
 -------------------
 
+![project-overview](https://github.com/bzdgn/spring-boot-restful-web-service-example/blob/master/ScreenShots/01_diagram.png)
