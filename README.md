@@ -226,4 +226,15 @@ You can check out the full POM file: [Project Object Model](https://github.com/b
  5 Project Overview
 -------------------
 
+Our project consist of several layers. For the simplicity, if we exclude the [EntryPoint](https://github.com/bzdgn/spring-boot-restful-web-service-example/blob/master/src/main/java/com/levent/consultantapi/EntryPoint.java) class 
+which is located at the top level package, we have the following packages;
+
+- [controller package](https://github.com/bzdgn/spring-boot-restful-web-service-example/tree/master/src/main/java/com/levent/consultantapi/controller)
+- [service package](https://github.com/bzdgn/spring-boot-restful-web-service-example/tree/master/src/main/java/com/levent/consultantapi/service)
+- [repository package](https://github.com/bzdgn/spring-boot-restful-web-service-example/tree/master/src/main/java/com/levent/consultantapi/repository)
+- [model package](https://github.com/bzdgn/spring-boot-restful-web-service-example/tree/master/src/main/java/com/levent/consultantapi/model)
+
+You can see the logical representation below of these packages;
+
 ![project-overview](https://github.com/bzdgn/spring-boot-restful-web-service-example/blob/master/ScreenShots/01_diagram.png)
+
