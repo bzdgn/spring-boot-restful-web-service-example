@@ -35,12 +35,12 @@ TOC
 - [7 Application Properties](#7-application-properties) <br/>
 - [8 H2 Database Preparation](#8-h2-database-preparation) <br/>
 - [9 Sending And Receiving JSONs With Postman](#9-sending-and-receiving-jsons-with-postman) <br/>
-  * [9-a- XXXXXXXX](#9-a-xxxxxxxx) <br/>
-  * [9-b- XXXXXXXX](#9-b-xxxxxxxx) <br/>
-  * [9-c- XXXXXXXX](#9-c-xxxxxxxx) <br/>
-  * [9-d- XXXXXXXX](#9-d-xxxxxxxx) <br/>
-  * [9-e- XXXXXXXX](#9-e-xxxxxxxx) <br/>
-  * [9-f- XXXXXXXX](#9-f-xxxxxxxx) <br/>
+  * [9-a- Test](#9-a-test) <br/>
+  * [9-b- List](#9-b-list) <br/>
+  * [9-c- Create](#9-c-create) <br/>
+  * [9-d- Retrieve](#9-d-retrieve) <br/>
+  * [9-e- Update](#9-e-update) <br/>
+  * [9-f- Delete](#9-f-delete) <br/>
 
 
  0 Prerequisite And Demo App
@@ -50,6 +50,7 @@ To use this project, you are going to need;
 - Java JDK 8 (1.8)
 - Maven compatibile with JDK 8
 - Any Java IDE
+- [Postman tool](https://www.getpostman.com/) (optional, will be used for testing web service)
 
 We are going to build a demo app named as consultant-api. This will be a simple web service with
 basic CRUD operations. I'm going to demonstrate default and external configuration, how to use
@@ -440,4 +441,17 @@ Now our database is ready to go!
 
 
  9 Sending And Receiving JSONs With Postman
----------------------------------------------
+-------------------------------------------
+
+In this part, I'm going to demonstrate all operations defined in our [ConsultantController](https://github.com/bzdgn/spring-boot-restful-web-service-example/blob/master/src/main/java/com/levent/consultantapi/controller/ConsultantController.java) class and how to test them
+either with our web browser or with the [Postman tool](https://www.getpostman.com/). We can test our GET methods with any web browser but for
+operations that use HTTP POST, PUT, DELETE methods, we cannot execute them with a simple web browser, so I'm
+going to use [Postman tool](https://www.getpostman.com/) for that.
+
+You can download Postman via [this link](https://www.getpostman.com/)
+
+9-a- Test
+---------
+
+[Go back to Sending And Receiving JSONs With Postman](#9-sending-and-receiving-jsons-with-postman)
+
