@@ -453,7 +453,7 @@ You can download Postman via [this link](https://www.getpostman.com/)
 I've provided CRUD operations within postman, so that you can load all the prepared operations in Postman tool. You can
 find the content under misc directory;
 
-[Postman Collection](https://github.com/bzdgn/spring-boot-restful-web-service-example/blob/master/misc/Consultant API.postman_collection.json)
+[Postman Collection](https://github.com/bzdgn/spring-boot-restful-web-service-example/blob/master/misc/Consultant_API.postman_collection.json)
 
 9-a Test
 --------
@@ -479,11 +479,11 @@ file which is: [implementation.properties](https://github.com/bzdgn/spring-boot-
 You can select one of the four different implementations via the configuration file and see the results. For
 more information, you can go back to the [6 External Configuration Example](#6-external-configuration-example) section.
 
-[Go back to Sending And Receiving JSONs With Postman](#9-sending-and-receiving-jsons-with-postman)
+[Go back to Sending And Receiving JSONs With Postman](#9-sending-and-receiving-jsons-with-postman) <br/>
 [Go back to TOC](#toc)
 
-9-b- List
----------
+9-b List
+--------
 ```
 Sub Path: /consultants
 Full URL: http://localhost:8080/api/v1/consultants
@@ -522,11 +522,11 @@ Again we can use web browser to get the results as below;
 
 ![list-sample](https://github.com/bzdgn/spring-boot-restful-web-service-example/blob/master/ScreenShots/06_list.png)
 
-[Go back to Sending And Receiving JSONs With Postman](#9-sending-and-receiving-jsons-with-postman)
+[Go back to Sending And Receiving JSONs With Postman](#9-sending-and-receiving-jsons-with-postman) <br/>
 [Go back to TOC](#toc)
 
-9-c- Create
------------
+9-c Create
+----------
 ```
 Sub Path: /consultants
 Full URL: http://localhost:8080/api/v1/consultants
@@ -567,11 +567,11 @@ web browser);
 
 ![create-sample-test](https://github.com/bzdgn/spring-boot-restful-web-service-example/blob/master/ScreenShots/08_create_input_test.png)
 
-[Go back to Sending And Receiving JSONs With Postman](#9-sending-and-receiving-jsons-with-postman)
+[Go back to Sending And Receiving JSONs With Postman](#9-sending-and-receiving-jsons-with-postman) <br/>
 [Go back to TOC](#toc)
 
-9-d- Retrieve
--------------
+9-d Retrieve
+------------
 ```
 Sub Path: /consultants
 Full URL: http://localhost:8080/api/v1/consultants/{id}
@@ -601,11 +601,11 @@ The output will be as follows;
 
 ![retrieve-test](https://github.com/bzdgn/spring-boot-restful-web-service-example/blob/master/ScreenShots/09_retrieve_test.png)
 
-[Go back to Sending And Receiving JSONs With Postman](#9-sending-and-receiving-jsons-with-postman)
+[Go back to Sending And Receiving JSONs With Postman](#9-sending-and-receiving-jsons-with-postman) <br/>
 [Go back to TOC](#toc)
 
-9-e- Update
------------
+9-e Update
+----------
 ```
 Sub Path: /consultants
 Full URL: http://localhost:8080/api/v1/consultants/{id}
@@ -646,11 +646,11 @@ web browser);
 
 ![update-sample-test](https://github.com/bzdgn/spring-boot-restful-web-service-example/blob/master/ScreenShots/11_update_input_test.png)
 
-[Go back to Sending And Receiving JSONs With Postman](#9-sending-and-receiving-jsons-with-postman)
+[Go back to Sending And Receiving JSONs With Postman](#9-sending-and-receiving-jsons-with-postman) <br/>
 [Go back to TOC](#toc)
 
-9-f- Delete
------------
+9-f Delete
+----------
 ```
 Sub Path: /consultants
 Full URL: http://localhost:8080/api/v1/consultants/{id}
@@ -684,5 +684,5 @@ web browser);
 
 ![delete-sample-test](https://github.com/bzdgn/spring-boot-restful-web-service-example/blob/master/ScreenShots/13_delete_sample_test.png)
 
-[Go back to Sending And Receiving JSONs With Postman](#9-sending-and-receiving-jsons-with-postman)
+[Go back to Sending And Receiving JSONs With Postman](#9-sending-and-receiving-jsons-with-postman) <br/>
 [Go back to TOC](#toc)
