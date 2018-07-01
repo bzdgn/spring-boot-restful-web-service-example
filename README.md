@@ -41,7 +41,7 @@ TOC
   * [9-d- Retrieve](#9-d-retrieve) <br/>
   * [9-e- Update](#9-e-update) <br/>
   * [9-f- Delete](#9-f-delete) <br/>
-
+- [10 Building And Running The Standalone Application](#10-building-and-running-the-standalone-application) <br/>
 
  0 Prerequisite And Demo App
 ----------------------------
@@ -455,8 +455,8 @@ find the content under misc directory;
 
 [Postman Collection](https://github.com/bzdgn/spring-boot-restful-web-service-example/blob/master/misc/Consultant_API.postman_collection.json)
 
-9-a Test
---------
+ 9-a Test
+---------
 ```
 Sub Path: /test
 Full URL: http://localhost:8080/api/v1/test
@@ -482,8 +482,8 @@ more information, you can go back to the [6 External Configuration Example](#6-e
 [Go back to Sending And Receiving JSONs With Postman](#9-sending-and-receiving-jsons-with-postman) <br/>
 [Go back to TOC](#toc)
 
-9-b List
---------
+ 9-b List
+---------
 ```
 Sub Path: /consultants
 Full URL: http://localhost:8080/api/v1/consultants
@@ -525,8 +525,8 @@ Again we can use web browser to get the results as below;
 [Go back to Sending And Receiving JSONs With Postman](#9-sending-and-receiving-jsons-with-postman) <br/>
 [Go back to TOC](#toc)
 
-9-c Create
-----------
+ 9-c Create
+-----------
 ```
 Sub Path: /consultants
 Full URL: http://localhost:8080/api/v1/consultants
@@ -570,8 +570,8 @@ web browser);
 [Go back to Sending And Receiving JSONs With Postman](#9-sending-and-receiving-jsons-with-postman) <br/>
 [Go back to TOC](#toc)
 
-9-d Retrieve
-------------
+ 9-d Retrieve
+-------------
 ```
 Sub Path: /consultants
 Full URL: http://localhost:8080/api/v1/consultants/{id}
@@ -604,8 +604,8 @@ The output will be as follows;
 [Go back to Sending And Receiving JSONs With Postman](#9-sending-and-receiving-jsons-with-postman) <br/>
 [Go back to TOC](#toc)
 
-9-e Update
-----------
+ 9-e Update
+-----------
 ```
 Sub Path: /consultants
 Full URL: http://localhost:8080/api/v1/consultants/{id}
@@ -649,8 +649,8 @@ web browser);
 [Go back to Sending And Receiving JSONs With Postman](#9-sending-and-receiving-jsons-with-postman) <br/>
 [Go back to TOC](#toc)
 
-9-f Delete
-----------
+ 9-f Delete
+-----------
 ```
 Sub Path: /consultants
 Full URL: http://localhost:8080/api/v1/consultants/{id}
@@ -685,4 +685,60 @@ web browser);
 ![delete-sample-test](https://github.com/bzdgn/spring-boot-restful-web-service-example/blob/master/ScreenShots/13_delete_sample_test.png)
 
 [Go back to Sending And Receiving JSONs With Postman](#9-sending-and-receiving-jsons-with-postman) <br/>
+[Go back to TOC](#toc)
+
+
+ 10 Building And Running The Standalone Application
+---------------------------------------------------
+Now we can demonstrate how to run our consultant-api as a standalone application. First we must build with the following
+maven command;
+
+```
+mvn clean package
+```
+
+This command is going to collect all the needed jars and pack them into an Uber Jar (a.k.a. fat jar). We can find this
+Uber Jar under the "target" folder. The name of the file will be: "consultant-api-1.0-SNAPSHOT.jar"
+
+We are going to take this file and copy it to another arbitrary folder. Remember that we also need two configuration files,
+those that located under the config file. We will also copy those config files to our arbitrary folder.
+
+I copied all the files I mentioned above to the folder "D:\consultant-api\", the structure is as follows;
+
+```
+D:\consultant-api
+       |
+       |___ consultant-api-1.0-SNAPSHOT.jar
+       |___ config
+              |______ application.properties
+              |______ implementation.properties
+```
+
+If the structure of the arbitrary folder (here it is 'consultant-api'), then we can try to run our standalone application
+to see if it is working. Here is a successful output. For the simplicity, I'm not going to paste all the log output;
+
+```
+D:\consultant-api>java -jar consultant-api-1.0-SNAPSHOT.jar
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::         (v1.0-SNAPSHOT)
+
+2018-07-01 16:16:08.705  INFO 6616 --- [           main] com.levent.consultantapi.EntryPoint      : Starting EntryPoint v1.0-SNAPSHOT on LEVASUS with PID 6616 (D:\consultant-api\consultant-api-1.0-SNAPSHOT.jar started by Levent in D:\consultant-api)
+2018-07-01 16:16:08.711  INFO 6616 --- [           main] com.levent.consultantapi.EntryPoint      : No active profile set, falling back to default profiles: default
+2018-07-01 16:16:08.785  INFO 6616 --- [           main] ationConfigEmbeddedWebApplicationContext : Refreshing org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@27808f31: startup date [Sun Jul 01 16:16:08 CEST 2018]; root of context hierarchy
+2018-07-01 16:16:10.487  INFO 6616 --- [           main] o.s.b.f.s.DefaultListableBeanFactory     : Overriding bean definition for bean 'beanNameViewResolver' with a different definition: replacing [Root bean: class [null]; scope=; abstract=false; lazyInit=false; autowireMode=3; dependencyCheck=0; autowireCandidate=true; primary=false; factoryBeanName=org.springframework.boot.autoconfigure.web.ErrorMvcAutoConfiguration$WhitelabelErrorViewConfiguration; factoryMethodName=beanNameViewResolver; initMet
+```
+
+Then we can test if our standalone application is working fine with our web browser;
+
+![standalone-test](https://github.com/bzdgn/spring-boot-restful-web-service-example/blob/master/ScreenShots/14_standalone_test.png)
+
+Yes, our standalone application is working fine. We can easily deploy it in a Docker container, or just run it as
+it is.
+
 [Go back to TOC](#toc)
