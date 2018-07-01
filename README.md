@@ -32,13 +32,14 @@ TOC
 - [4 Making Uber Jar](#4-making-uber-jar) <br/>
 - [5 Project Overview](#5-project-overview) <br/>
 - [6 External Configuration Example](#6-external-configuration-example) <br/>
-- [55 XXXXXXXX](#55-testing-and-incoming-outgoing-json-samples) <br/>
-  * [55-a- XXXXXXXX](#55-a-xxxxxxxx) <br/>
-  * [55-b- XXXXXXXX](#55-b-xxxxxxxx) <br/>
-  * [55-c- XXXXXXXX](#55-c-xxxxxxxx) <br/>
-  * [55-d- XXXXXXXX](#55-d-xxxxxxxx) <br/>
-  * [55-e- XXXXXXXX](#55-e-xxxxxxxx) <br/>
-  * [55-f- XXXXXXXX](#55-f-xxxxxxxx) <br/>
+- [7 Application Properties](#7-application-properties) <br/>
+- [8 XXXXXXXX](#8-testing-and-incoming-outgoing-json-samples) <br/>
+  * [8-a- XXXXXXXX](#8-a-xxxxxxxx) <br/>
+  * [8-b- XXXXXXXX](#8-b-xxxxxxxx) <br/>
+  * [8-c- XXXXXXXX](#8-c-xxxxxxxx) <br/>
+  * [8-d- XXXXXXXX](#8-d-xxxxxxxx) <br/>
+  * [8-e- XXXXXXXX](#8-e-xxxxxxxx) <br/>
+  * [8-f- XXXXXXXX](#8-f-xxxxxxxx) <br/>
 
 
  0 Prerequisite
@@ -323,4 +324,20 @@ You can see the overview of this process via the diagram below;
 
 ![process-overview](https://github.com/bzdgn/spring-boot-restful-web-service-example/blob/master/ScreenShots/02_diagram.png)
 
+[Go back to TOC](#toc)
 
+
+ 7 Application Properties
+-------------------------
+
+Spring Boot solves our problem with automatic configuration as we use an embedded Tomcat and an embedded H2
+database but how are we going to specify the running port of the Tomcat container, the target database, 
+connection pool parameters and so on?
+
+Spring Boot provides a default configuration properties file called as application.properties. Within this file
+there are hundreds of configuration parameters we can use. You can see the detailed parameter list via following
+link;
+
+[Spring Boot Application Properties Reference](https://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html)
+
+[Go back to TOC](#toc)
