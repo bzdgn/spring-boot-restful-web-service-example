@@ -450,8 +450,8 @@ going to use [Postman tool](https://www.getpostman.com/) for that.
 
 You can download Postman via [this link](https://www.getpostman.com/)
 
-9-a--Test
----------
+9-a Test
+--------
 
 [Go back to Sending And Receiving JSONs With Postman](#9-sending-and-receiving-jsons-with-postman)
 
