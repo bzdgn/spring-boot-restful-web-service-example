@@ -35,12 +35,12 @@ TOC
 - [7 Application Properties](#7-application-properties) <br/>
 - [8 H2 Database Preparation](#8-h2-database-preparation) <br/>
 - [9 Sending And Receiving JSONs With Postman](#9-sending-and-receiving-jsons-with-postman) <br/>
-  * [9-a- Test](#9--a-test) <br/>
-  * [9-b- List](#9--b-list) <br/>
-  * [9-c- Create](#9--c-create) <br/>
-  * [9-d- Retrieve](#9--d-retrieve) <br/>
-  * [9-e- Update](#9--e-update) <br/>
-  * [9-f- Delete](#9--f-delete) <br/>
+  * [9-a- Test](#9-a-test) <br/>
+  * [9-b- List](#9-b-list) <br/>
+  * [9-c- Create](#9-c-create) <br/>
+  * [9-d- Retrieve](#9-d-retrieve) <br/>
+  * [9-e- Update](#9-e-update) <br/>
+  * [9-f- Delete](#9-f-delete) <br/>
 
 
  0 Prerequisite And Demo App
