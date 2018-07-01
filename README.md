@@ -450,8 +450,239 @@ going to use [Postman tool](https://www.getpostman.com/) for that.
 
 You can download Postman via [this link](https://www.getpostman.com/)
 
+I've provided CRUD operations within postman, so that you can load all the prepared operations in Postman tool. You can
+find the content under misc directory;
+
+[Postman Collection](https://github.com/bzdgn/spring-boot-restful-web-service-example/blob/master/misc/Consultant API.postman_collection.json)
+
 9-a Test
 --------
+```
+Sub Path: /test
+Full URL: http://localhost:8080/api/v1/test
+Method:   GET
+Sends:    N/A
+Receives: Text
+Sample Input: N/A
+Sample Output; 
+
+Consultant-Api Version: 1.0.0 Written by: Levent Divilioglu
+```
+
+We can simply use our web browser and receive the text output as below;
+
+![test-sample](https://github.com/bzdgn/spring-boot-restful-web-service-example/blob/master/ScreenShots/05_test.png)
+
+But take into the consideration that this response based on which implementation we define on our custom configuration
+file which is: [implementation.properties](https://github.com/bzdgn/spring-boot-restful-web-service-example/blob/master/config/implementation.properties).
+
+You can select one of the four different implementations via the configuration file and see the results. For
+more information, you can go back to the [6 External Configuration Example](#6-external-configuration-example) section.
 
 [Go back to Sending And Receiving JSONs With Postman](#9-sending-and-receiving-jsons-with-postman)
+[Go back to TOC](#toc)
 
+9-b- List
+---------
+```
+Sub Path: /consultants
+Full URL: http://localhost:8080/api/v1/consultants
+Method:   GET
+Sends:    N/A
+Receives: JSON
+Sample Input: N/A
+Sample Output;
+[{
+	"id": 1,
+	"firstName": "Levent",
+	"lastName": "Divilioglu",
+	"age": 36,
+	"client": null,
+	"assigned": false
+},
+{
+	"id": 2,
+	"firstName": "Altug",
+	"lastName": "Timuroglu",
+	"age": 41,
+	"client": "Altinorda IT",
+	"assigned": true
+},
+{
+	"id": 3,
+	"firstName": "Bugra",
+	"lastName": "Cengizoglu",
+	"age": 37,
+	"client": "KizilTug TECH",
+	"assigned": true
+}]
+```
+
+Again we can use web browser to get the results as below;
+
+![list-sample](https://github.com/bzdgn/spring-boot-restful-web-service-example/blob/master/ScreenShots/06_list.png)
+
+[Go back to Sending And Receiving JSONs With Postman](#9-sending-and-receiving-jsons-with-postman)
+[Go back to TOC](#toc)
+
+9-c- Create
+-----------
+```
+Sub Path: /consultants
+Full URL: http://localhost:8080/api/v1/consultants
+Method:   POST
+Sends:    JSON
+Receives: JSON
+Sample Input;
+{
+	"id": 4,
+	"firstName": "John",
+	"lastName": "Doe",
+	"age": 99,
+	"client": "Example Tech",
+	"assigned": true
+}
+Sample Output;
+{
+    "id": 4,
+    "firstName": "John",
+    "lastName": "Doe",
+    "age": 99,
+    "client": "Example Tech",
+    "assigned": true
+}
+```
+
+This time, the operation we are using is POST, so we cannot do that with our browser, we have to use our tool
+Postman. Here is how I create my HTTP request;
+
+![create-sample](https://github.com/bzdgn/spring-boot-restful-web-service-example/blob/master/ScreenShots/07_create_input.png)
+
+With the '+' sign above on the Postman screen, we can create our HTTP request. Then we select HTTP Method as POST.
+We paste the URL, select "raw", and JSON for our input content. Then we select the "body" tag, and paste our content
+which we want to POST. Under the second half of the screen, on the "body" tag, we will retrieve our JSON response.
+
+As you can see, the created content is returned. We can also test the result using our list service via postman (or
+web browser);
+
+![create-sample-test](https://github.com/bzdgn/spring-boot-restful-web-service-example/blob/master/ScreenShots/08_create_input_test.png)
+
+[Go back to Sending And Receiving JSONs With Postman](#9-sending-and-receiving-jsons-with-postman)
+[Go back to TOC](#toc)
+
+9-d- Retrieve
+-------------
+```
+Sub Path: /consultants
+Full URL: http://localhost:8080/api/v1/consultants/{id}
+Method:   GET
+Sends:    N/A
+Receives: JSON
+Sample Input: N/A
+Sample Output;
+{
+    "id": 4,
+    "firstName": "John",
+    "lastName": "Doe",
+    "age": 99,
+    "client": "Example Tech",
+    "assigned": true
+}
+```
+
+It is a simple GET again, and let's use our browser for testing. We are going to use a path
+parameter which will be "4", the full path is as below;
+
+```
+http://localhost:8080/api/v1/consultants/4
+```
+
+The output will be as follows;
+
+![retrieve-test](https://github.com/bzdgn/spring-boot-restful-web-service-example/blob/master/ScreenShots/09_retrieve_test.png)
+
+[Go back to Sending And Receiving JSONs With Postman](#9-sending-and-receiving-jsons-with-postman)
+[Go back to TOC](#toc)
+
+9-e- Update
+-----------
+```
+Sub Path: /consultants
+Full URL: http://localhost:8080/api/v1/consultants/{id}
+Method:   PUT
+Sends:    JSON
+Receives: JSON
+Sample Input;
+{
+	"id": 4,
+	"firstName": "Jayne",
+	"lastName": "Smith",
+	"age": 66,
+	"client": "Example New Company",
+	"assigned": true
+}
+Sample Output;
+{
+    "id": 4,
+    "firstName": "Jayne",
+    "lastName": "Smith",
+    "age": 66,
+    "client": "Example New Company",
+    "assigned": true
+}
+```
+In order to update, we are going to use PUT method, so we will use Postman again.
+
+For update method, we have to give the id in the URL as a path parameter, so URL will be as below;
+
+```
+http://localhost:8080/api/v1/consultants/4
+```
+
+![update-sample](https://github.com/bzdgn/spring-boot-restful-web-service-example/blob/master/ScreenShots/10_update_input.png)
+
+As you can see, the updated content is returned. We can also test the result using our retrieve service via postman (or
+web browser);
+
+![update-sample-test](https://github.com/bzdgn/spring-boot-restful-web-service-example/blob/master/ScreenShots/11_update_input_test.png)
+
+[Go back to Sending And Receiving JSONs With Postman](#9-sending-and-receiving-jsons-with-postman)
+[Go back to TOC](#toc)
+
+9-f- Delete
+-----------
+```
+Sub Path: /consultants
+Full URL: http://localhost:8080/api/v1/consultants/{id}
+Method:   DELETE
+Sends:    N/A
+Receives: JSON
+Sample Input: N/A
+Sample Output;
+{
+    "id": 4,
+    "firstName": "Jayne",
+    "lastName": "Smith",
+    "age": 66,
+    "client": "Example New Company",
+    "assigned": true
+}
+```
+
+Again, we will use Postman for DELETE operation. As it is shown above, we don't have to provide
+a body for this operation, but we have to provide the id of the consultant to be deleted within the
+URL as below;
+
+```
+http://localhost:8080/api/v1/consultants/4
+```
+
+![delete-sample](https://github.com/bzdgn/spring-boot-restful-web-service-example/blob/master/ScreenShots/12_delete_sample.png)
+
+As you can see, the deleted content is returned. We can also test the result using our retrieve service via postman (or
+web browser);
+
+![delete-sample-test](https://github.com/bzdgn/spring-boot-restful-web-service-example/blob/master/ScreenShots/13_delete_sample_test.png)
+
+[Go back to Sending And Receiving JSONs With Postman](#9-sending-and-receiving-jsons-with-postman)
+[Go back to TOC](#toc)

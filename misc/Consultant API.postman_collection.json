@@ -1,0 +1,138 @@
+{
+	"info": {
+		"_postman_id": "a51970ab-1442-45ba-8fa4-b1bbe8e54a80",
+		"name": "Consultant API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Consultant API: Create ",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"id\": 4,\r\n\t\"firstName\": \"John\",\r\n\t\"lastName\": \"Doe\",\r\n\t\"age\": 99,\r\n\t\"client\": \"Example Tech\",\r\n\t\"assigned\": true\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/consultants",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"consultants"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Consultant API: List",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/consultants",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"consultants"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Consultant API: Update",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"id\": 4,\r\n\t\"firstName\": \"Jayne\",\r\n\t\"lastName\": \"Smith\",\r\n\t\"age\": 66,\r\n\t\"client\": \"Example New Company\",\r\n\t\"assigned\": true\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/consultants/4",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"consultants",
+						"4"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Consultant API: Retrieve",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/consultants/4",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"consultants",
+						"4"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Consultant API: Delete",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/consultants/4",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"consultants",
+						"4"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

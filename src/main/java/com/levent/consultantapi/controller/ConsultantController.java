@@ -25,7 +25,7 @@ public class ConsultantController {
 	
 	public ConsultantController() {}
 	
-	@RequestMapping("/")
+	@RequestMapping("/test")
 	public String test() {
 		return greeter.getGreet();
 	}
