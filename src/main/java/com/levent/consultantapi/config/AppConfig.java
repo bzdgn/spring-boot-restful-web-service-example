@@ -12,7 +12,7 @@ import com.levent.consultantapi.service.info.impl.InfoServiceImpl3;
 import com.levent.consultantapi.service.info.impl.InfoServiceImpl4;
 
 @Configuration
-//@PropertySource(value = "classpath:implementation.properties")
+//@PropertySource(value = "classpath:implementation.properties")		// Use his when file is in classpath, ex: main/src/resources
 @PropertySource("file:./config/implementation.properties")
 public class AppConfig {
 	
@@ -20,7 +20,7 @@ public class AppConfig {
 	String impl;
 	
 	@Bean
-	public InfoService handleAnan() {
+	public InfoService getImplementationFromPropertiesFile() {
 		System.out.println("Implementation: " + impl);
 		
 		switch(impl) {
@@ -41,7 +41,7 @@ public class AppConfig {
 			}
 			
 			default: {
-				return null;
+				throw new IllegalStateException("No such implementation: " + impl);
 			}
 		}
 	}

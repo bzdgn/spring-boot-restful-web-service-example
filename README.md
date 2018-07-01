@@ -30,7 +30,8 @@ TOC
 - [2 Create Spring Boot Project With Maven](#2-create-spring-boot-project-with-maven) <br/>
 - [3 Spring Boot Dependencies](#3-spring-boot-dependencies) <br/>
 - [4 Making Uber Jar](#4-making-uber-jar) <br/>
-- [5 Project Overview](#5-project-overview)
+- [5 Project Overview](#5-project-overview) <br/>
+- [6 External Configuration Example](#6-external-configuration-example) <br/>
 - [55 XXXXXXXX](#55-testing-and-incoming-outgoing-json-samples) <br/>
   * [55-a- XXXXXXXX](#55-a-xxxxxxxx) <br/>
   * [55-b- XXXXXXXX](#55-b-xxxxxxxx) <br/>
@@ -146,6 +147,11 @@ dependency to our dependencies block;
 	<artifactId>h2</artifactId>
 </dependency>
 ```
+
+The last thing additional to our dependencies in the POM file is to use the @SpringBootApplication
+annotation on our [EntryPoint](https://github.com/bzdgn/spring-boot-restful-web-service-example/blob/master/src/main/java/com/levent/consultantapi/EntryPoint.java) class.
+
+With this, Spring Boot configuration is complete.
 
 [Go back to TOC](#toc)
 
@@ -276,3 +282,45 @@ to use, without changing the code ? Then we can use an external configuration, w
 explain it on next chapter.
 
 [Go back to TOC](#toc)
+
+
+ 6 External Configuration Example
+---------------------------------
+
+Normally, Spring Boot configuration is defined with [application.properties](https://github.com/bzdgn/spring-boot-restful-web-service-example/blob/master/config/application.properties). It is default location can be either under
+src/main/resources folder, or under a subfolder of current directoy named with "config". I'm using the second way, created
+a config folder under the project, and put the main [application.properties](https://github.com/bzdgn/spring-boot-restful-web-service-example/blob/master/config/application.properties) file there. 
+
+However, I also want to have the common properties on [application.properties](https://github.com/bzdgn/spring-boot-restful-web-service-example/blob/master/config/application.properties) file, and in addition to it, for specific
+purposes, I want to use a secondary properties folder. In this chapter, I'm going to demonstrate how to use externalized
+custom properties file.
+
+But first, let's go back to our previous problem that which I've talked about. The scenario is as follows: I've two or multiple
+implementations for a single interface with @Autowired annotation, and I don't want to do any code change when I switch between 
+the implementations. Spring's solution for that was using the @Primary annotation so that Spring Context is not going to throw an  exception because that it does not know which implementation to use.
+
+Here is my solution;
+
+- I create an externalized configuration file named as [implementation.properties](https://github.com/bzdgn/spring-boot-restful-web-service-example/blob/master/config/implementation.properties)
+- I've created [AppConfig](https://github.com/bzdgn/spring-boot-restful-web-service-example/blob/master/src/main/java/com/levent/consultantapi/config/AppConfig.java) class to read the custom configuration file
+
+If you look at to [AppConfig](https://github.com/bzdgn/spring-boot-restful-web-service-example/blob/master/src/main/java/com/levent/consultantapi/config/AppConfig.java) class under the config package, you will see that the class file is marked with two annotations.
+First it is marked with @Configuration annotation because it needs to be done before the injection of the autowired variable.
+And secondly, it is marked with @PropertySource, so that we are going to point out which specific property file we are going
+to use.
+
+The process is as follows;
+
+- Spring context searchs for the @Configuration annotation, finds the [AppConfig](https://github.com/bzdgn/spring-boot-restful-web-service-example/blob/master/src/main/java/com/levent/consultantapi/config/AppConfig.java)
+- Via [AppConfig](https://github.com/bzdgn/spring-boot-restful-web-service-example/blob/master/src/main/java/com/levent/consultantapi/config/AppConfig.java), reads the [implementation.properties](https://github.com/bzdgn/spring-boot-restful-web-service-example/blob/master/config/implementation.properties) file
+- The greeter.implementation property's value is loaded to the impl variable in the [AppConfig](https://github.com/bzdgn/spring-boot-restful-web-service-example/blob/master/src/main/java/com/levent/consultantapi/config/AppConfig.java)
+- Via the #getImplementationFromPropertiesFile method, the implementation bean is created based on the config file
+- The context has the right implementation based on the configuration
+- During the creation of the [ConsultantController](https://github.com/bzdgn/spring-boot-restful-web-service-example/blob/master/src/main/java/com/levent/consultantapi/controller/ConsultantController.java) class, Spring Context finds the autowired field: greeter which is an interface: [InfoService](https://github.com/bzdgn/spring-boot-restful-web-service-example/blob/master/src/main/java/com/levent/consultantapi/service/InfoService.java)
+- The implementation bean is autowired to this greeter field
+
+You can see the overview of this process via the diagram below;
+
+![process-overview](https://github.com/bzdgn/spring-boot-restful-web-service-example/blob/master/ScreenShots/02_diagram.png)
+
+
