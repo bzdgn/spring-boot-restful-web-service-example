@@ -25,7 +25,7 @@ Postman tool.
 
 TOC
 ---
-- [0 Prerequisite](#0-prerequisite) <br/>
+- [0 Prerequisite And Demo App](#0-prerequisite-and-demo-app) <br/>
 - [1 About Spring Boot](#1-about-spring-boot) <br/>
 - [2 Create Spring Boot Project With Maven](#2-create-spring-boot-project-with-maven) <br/>
 - [3 Spring Boot Dependencies](#3-spring-boot-dependencies) <br/>
@@ -33,22 +33,29 @@ TOC
 - [5 Project Overview](#5-project-overview) <br/>
 - [6 External Configuration Example](#6-external-configuration-example) <br/>
 - [7 Application Properties](#7-application-properties) <br/>
-- [8 XXXXXXXX](#8-testing-and-incoming-outgoing-json-samples) <br/>
-  * [8-a- XXXXXXXX](#8-a-xxxxxxxx) <br/>
-  * [8-b- XXXXXXXX](#8-b-xxxxxxxx) <br/>
-  * [8-c- XXXXXXXX](#8-c-xxxxxxxx) <br/>
-  * [8-d- XXXXXXXX](#8-d-xxxxxxxx) <br/>
-  * [8-e- XXXXXXXX](#8-e-xxxxxxxx) <br/>
-  * [8-f- XXXXXXXX](#8-f-xxxxxxxx) <br/>
+- [8 H2 Database Preparation](#8-h2-database-preparation) <br/>
+- [9 Sending And Receiving JSONs With Postman](#9-sending-and-receiving-jsons-with-postman) <br/>
+  * [9-a- XXXXXXXX](#9-a-xxxxxxxx) <br/>
+  * [9-b- XXXXXXXX](#9-b-xxxxxxxx) <br/>
+  * [9-c- XXXXXXXX](#9-c-xxxxxxxx) <br/>
+  * [9-d- XXXXXXXX](#9-d-xxxxxxxx) <br/>
+  * [9-e- XXXXXXXX](#9-e-xxxxxxxx) <br/>
+  * [9-f- XXXXXXXX](#9-f-xxxxxxxx) <br/>
 
 
- 0 Prerequisite
----------------
+ 0 Prerequisite And Demo App
+----------------------------
 To use this project, you are going to need;
 
 - Java JDK 8 (1.8)
 - Maven compatibile with JDK 8
 - Any Java IDE
+
+We are going to build a demo app named as consultant-api. This will be a simple web service with
+basic CRUD operations. I'm going to demonstrate default and external configuration, how to use
+multiple implementation and autowire them within the code and outside the code with an external
+configuration file. Our app will be a standalone application that we can use independently, and
+we are going to use an embedded tomcat, an embedded H2 database.
 
 [Go back to TOC](#toc)
 
@@ -334,10 +341,103 @@ Spring Boot solves our problem with automatic configuration as we use an embedde
 database but how are we going to specify the running port of the Tomcat container, the target database, 
 connection pool parameters and so on?
 
-Spring Boot provides a default configuration properties file called as application.properties. Within this file
+Spring Boot provides a default configuration properties file called as [application.properties](https://github.com/bzdgn/spring-boot-restful-web-service-example/blob/master/config/application.properties). Within this file
 there are hundreds of configuration parameters we can use. You can see the detailed parameter list via following
 link;
 
 [Spring Boot Application Properties Reference](https://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html)
 
+The default locations of the application.properties file is either somewhere within the classpath, for example
+under src/main/resources in a maven project, or a inside config folder under current working directory. It is
+better to put the file under config folder which will make it easy to deploy inside a docker container, but
+the choice is yours. I place [application.properties](https://github.com/bzdgn/spring-boot-restful-web-service-example/blob/master/config/application.properties) under config folder.
+
+Because that we are using a server, H2 database, a datasource, a db connection pool and lastly, hibernate,
+we should define parameters in this [application.properties](https://github.com/bzdgn/spring-boot-restful-web-service-example/blob/master/config/application.properties) file, based on the [documented reference list](https://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html).
+
+Let's take a detailed look;
+
+- Server Configuration
+&nbsp;&nbsp;&nbsp;&nbsp;The default configuration port is 8080, however we may want to change this. Thus I add the port configuration
+&nbsp;&nbsp;&nbsp;&nbsp;as below;
+```
+#server port
+server.port=8080
+```
+    
+- H2 Database Configuration
+&nbsp;&nbsp;&nbsp;&nbspWe also need to specify whether the console is activated, so that we can use H2 database via the console, create
+&nbsp;&nbsp;&nbsp;&nbsp;our tables and initialize our db entries.
+    
+```
+#H2 configuration
+spring.h2.console.enabled=true
+spring.h2.console.path=/h2
+```
+
+- DataSource Configuration
+&nbsp;&nbsp;&nbsp;&nbsp;Instead of writing a connection string, we are defining the parameters via our properties file as below;
+&nbsp;&nbsp;&nbsp;&nbsp;Notify that we defined our database as a file and the name of the database is "consultantapi". We are going to use it when
+&nbsp;&nbsp;&nbsp;&nbsp;we need to connect the database via the console;
+
+```
+#Data source configuration
+spring.datasource.url=jdbc:h2:file:~/consultantapi
+spring.datasource.username=sa
+spring.datasource.password=
+spring.datasource.driver-class-name=org.h2.Driver
+```
+
+- Connection Pool Configuration
+&nbsp;&nbsp;&nbsp;&nbsp; Here we define the connection pool parameters;
+
+```
+#DB Pool conf
+spring.datasource.max-active=10
+spring.datasource.max-idle=8
+spring.datasource.max-wait=10000
+spring.datasource.min-evictable-idle-time-millis=1000
+spring.datasource.min-idle=8
+spring.datasource.time-between-eviction-runs-millis=1
+```
+
+- Hibernate Configuration
+&nbsp;&nbsp;&nbsp;&nbsp;We don't want Hibernate to delete our database entries on every restart of our server, so we need to configure as below;
+
+```
+#Hibernate Config
+spring.jpa.hibernate.ddl-auto=false		#false for persistent database
+```
+
+You can check our project's application properties file via here: [application.properties](https://github.com/bzdgn/spring-boot-restful-web-service-example/blob/master/config/application.properties)
+
 [Go back to TOC](#toc)
+
+
+ 8 H2 Database Preparation
+--------------------------
+Before using our database implementation instead of using our stub implementation, we need to prepare our table
+and initial entries within the database. We have two things to do;
+
+1. We need to create a CONSULTANT table to store our consultant model, defined in [Consultant](https://github.com/bzdgn/spring-boot-restful-web-service-example/blob/master/src/main/java/com/levent/consultantapi/model/Consultant.java) class.
+2. We need to insert some trivial entries to the table.
+
+The related SQL commands are located under the [consultant.sql](https://github.com/bzdgn/spring-boot-restful-web-service-example/blob/master/src/main/resources/consultant.sql)
+
+As it is written on previous chapter, we have defined our H2 console with "/h2" postfix. Also we have defined our server
+port as "8080", so connection url will be [http://localhost:8080/h2/](http://localhost:8080/h2/). We can connect our H2
+database console as below;
+
+![H2-console](https://github.com/bzdgn/spring-boot-restful-web-service-example/blob/master/ScreenShots/03_diagram.png)
+
+After connecting to the database via the console, we can easily run our sql commands defined in [consultant.sql](https://github.com/bzdgn/spring-boot-restful-web-service-example/blob/master/src/main/resources/consultant.sql) as below;
+
+![H2-console](https://github.com/bzdgn/spring-boot-restful-web-service-example/blob/master/ScreenShots/04_diagram.png)
+
+Now our database is ready to go!
+
+[Go back to TOC](#toc)
+
+
+ 9 9 Sending And Receiving JSONs With Postman
+---------------------------------------------
